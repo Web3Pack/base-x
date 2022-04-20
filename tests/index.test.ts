@@ -1,25 +1,6 @@
 import basex from '../src';
 import fixtures from './fixtures.json';
-
-const uint8ArrayToHexString = (uint8: Uint8Array): string =>
-    Array.from(uint8).reduce(
-        (acc, curr) => `${acc}${curr.toString(16).padStart(2, '0')}`,
-        ''
-    );
-
-const uint8ArrayFromHexString = (string: string): Uint8Array | never => {
-    if (!string.length) {
-        return new Uint8Array(0);
-    }
-
-    if (string.length % 2 !== 0) {
-        throw new Error('Invalid hex string');
-    }
-
-    return new Uint8Array(
-        (string.match(/.{1,2}/g) ?? []).map((byte) => parseInt(byte, 16))
-    );
-};
+import { uint8FromHex, uint8ToHex } from './utils';
 
 const bases = Object.entries(fixtures.alphabets).reduce(
     (all, [name, alphabet]) => ({ ...all, [name]: basex(alphabet) }),
@@ -29,7 +10,7 @@ const bases = Object.entries(fixtures.alphabets).reduce(
 fixtures.valid.forEach((f) => {
     test('can encode ' + f.alphabet + ': ' + f.hex, () => {
         var base = bases[f.alphabet];
-        var actual = base.encode(uint8ArrayFromHexString(f.hex));
+        var actual = base.encode(uint8FromHex(f.hex));
 
         expect(actual).toBe(f.string);
     });
@@ -38,7 +19,7 @@ fixtures.valid.forEach((f) => {
 fixtures.valid.forEach((f) => {
     test('can decode ' + f.alphabet + ': ' + f.string, () => {
         var base = bases[f.alphabet];
-        var actual = uint8ArrayToHexString(base.decode(f.string));
+        var actual = uint8ToHex(base.decode(f.string));
 
         expect(actual).toBe(f.hex);
     });
