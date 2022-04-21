@@ -10,12 +10,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "build": "tsc",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "prepublish": "npm run build"
-  },
   "keywords": [
     "base2",
     "base16",
@@ -30,6 +24,20 @@
   ],
   "author": "Evren Ceyhan",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Web3Pack/base-x.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Web3Pack/base-x/issues"
+  },
+  "homepage": "https://github.com/Web3Pack/base-x#readme",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepublish": "npm run build"
+  },
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
