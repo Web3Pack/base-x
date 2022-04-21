@@ -89,18 +89,7 @@ export class BaseConverter {
     /**
      * Decode given string.
      */
-    decode(string: string): Uint8Array | never {
-        const buffer = this.decodeUnsafe(string);
-
-        if (buffer) return buffer;
-
-        throw new Error('Non-base' + this.base + ' character');
-    }
-
-    /**
-     * Decode given string with possible null result.
-     */
-    decodeUnsafe(source: string): Uint8Array | undefined | never {
+    decode(source: string): Uint8Array | never {
         // skip decoding if source is empty
         if (source.length === 0) return new Uint8Array();
 
@@ -124,7 +113,9 @@ export class BaseConverter {
             let carry = this.baseMap[source.charCodeAt(psz)];
 
             // Invalid character
-            if (carry === 255) return;
+            if (carry === 255) {
+                throw new Error('Non-base' + this.base + ' character');
+            }
 
             let i = 0;
             for (
@@ -137,7 +128,11 @@ export class BaseConverter {
                 carry = (carry / 256) >>> 0;
             }
 
-            if (carry !== 0) throw new Error('Non-zero carry');
+            // fail if carry is not zero
+            if (carry !== 0) {
+                throw new Error('Non-zero carry');
+            }
+
             length = i;
             psz++;
         }
