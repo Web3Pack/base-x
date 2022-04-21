@@ -1,9 +1,4 @@
-import {
-    BufferLike,
-    calculateFactor,
-    uint8FromBufferLike,
-    validateAlphabet,
-} from './utils';
+import { BufferLike, calculateFactor, uint8FromBufferLike } from './utils';
 
 export class BaseConverter {
     /**
@@ -16,9 +11,6 @@ export class BaseConverter {
     private readonly iFactor: number;
 
     constructor(private readonly alphabet: string) {
-        // validate alphabet
-        validateAlphabet(alphabet);
-
         // generate constants
         this.base = alphabet.length;
         this.leader = alphabet.charAt(0);
