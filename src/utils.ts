@@ -9,6 +9,15 @@ export type Hex = string;
 export type BufferLike = Uint8Array | number[];
 
 /**
+ * Validate given alphabet.
+ */
+export const validateAlphabet = (alphabet: string): void | never => {
+    if (alphabet.length >= 255) {
+        throw new TypeError('Alphabet too long');
+    }
+};
+
+/**
  * Validate given hex string.
  */
 export const validateHex = (hex: Hex): void | never => {

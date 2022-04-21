@@ -4,7 +4,30 @@
 // Distributed under the MIT software license, see the accompanying
 // file LICENSE or http://www.opensource.org/licenses/mit-license.php.
 
-import { BufferLike, uint8FromBufferLike } from './utils';
+import { BufferLike, uint8FromBufferLike, validateAlphabet } from './utils';
+
+/**
+ * Create base map from given alphabet string.
+ */
+const createBaseMap = (alphabet: string): Uint8Array | never => {
+    // define empty base map blueprint
+    const baseMap = new Uint8Array(256).fill(255);
+
+    // iterate over alphabet and create base map
+    [...alphabet].forEach((char, i) => {
+        // get char code
+        const code = char.charCodeAt(0);
+
+        // fail if char is ambiguous
+        if (baseMap[code] !== 255) {
+            throw new TypeError(char + ' is ambiguous');
+        }
+
+        baseMap[code] = i;
+    });
+
+    return baseMap;
+};
 
 export interface BaseConverter {
     encode(buffer: Uint8Array | number[]): string;
@@ -13,22 +36,11 @@ export interface BaseConverter {
 }
 
 export function base(ALPHABET: string): BaseConverter {
-    if (ALPHABET.length >= 255) throw new TypeError('Alphabet too long');
-
-    const BASE_MAP = new Uint8Array(256);
-    for (let j = 0; j < BASE_MAP.length; j++) {
-        BASE_MAP[j] = 255;
-    }
-
-    for (let i = 0; i < ALPHABET.length; i++) {
-        const x = ALPHABET.charAt(i);
-        const xc = x.charCodeAt(0);
-
-        if (BASE_MAP[xc] !== 255) throw new TypeError(x + ' is ambiguous');
-        BASE_MAP[xc] = i;
-    }
+    // validate alphabet
+    validateAlphabet(ALPHABET);
 
     const BASE = ALPHABET.length;
+    const BASE_MAP = createBaseMap(ALPHABET);
     const LEADER = ALPHABET.charAt(0);
     const FACTOR = Math.log(BASE) / Math.log(256); // log(BASE) / log(256), rounded up
     const iFACTOR = Math.log(256) / Math.log(BASE); // log(256) / log(BASE), rounded up
