@@ -1,7 +1,7 @@
 {
-  "name": "base-x",
+  "name": "@web3pack/base-x",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fast base encoding / decoding of any given alphabet",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,18 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "base2",
+    "base16",
+    "base45",
+    "base58",
+    "encode",
+    "encoding",
+    "decode",
+    "decoding",
+    "crypto",
+    "crytography"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
