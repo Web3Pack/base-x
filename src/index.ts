@@ -4,7 +4,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file LICENSE or http://www.opensource.org/licenses/mit-license.php.
 
-function base(ALPHABET: string): base.BaseConverter {
+export interface BaseConverter {
+    encode(buffer: Uint8Array | number[]): string;
+    decodeUnsafe(string: string): Uint8Array | undefined;
+    decode(string: string): Uint8Array;
+}
+
+export function base(ALPHABET: string): BaseConverter {
     if (ALPHABET.length >= 255) throw new TypeError('Alphabet too long');
 
     const BASE_MAP = new Uint8Array(256);
@@ -155,18 +161,8 @@ function base(ALPHABET: string): base.BaseConverter {
     }
 
     return {
-        encode: encode,
-        decodeUnsafe: decodeUnsafe,
-        decode: decode,
+        encode,
+        decodeUnsafe,
+        decode,
     };
-}
-
-export = base;
-
-declare namespace base {
-    interface BaseConverter {
-        encode(buffer: Uint8Array | number[]): string;
-        decodeUnsafe(string: string): Uint8Array | undefined;
-        decode(string: string): Uint8Array;
-    }
 }
