@@ -1,6 +1,6 @@
+import { uint8FromHex, uint8ToHex } from '../src/utils';
 import { base as basex, BaseConverter } from '../src';
 import fixtures from './fixtures.json';
-import { uint8FromHex, uint8ToHex } from './utils';
 
 const bases = Object.entries(fixtures.alphabets).reduce(
     (all, [name, alphabet]) => ({ ...all, [name]: basex(alphabet) }),
