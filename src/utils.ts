@@ -1,9 +1,4 @@
 /**
- * Alias for hex string.
- */
-export type Hex = string;
-
-/**
  * Alias for all buffer like types.
  */
 export type BufferLike = Uint8Array | number[];
@@ -20,7 +15,7 @@ export const calculateFactor = (x: number, y = 256) =>
  * Same as below:
  *  const buffer = Buffer.from('0x010203040506', 'hex');
  */
-export const uint8ToHex = (uint8: Uint8Array): Hex =>
+export const uint8ToHex = (uint8: Uint8Array): string =>
     Array.from(uint8).reduce(
         (acc, curr) => acc + curr.toString(16).padStart(2, '0'),
         ''
@@ -32,7 +27,7 @@ export const uint8ToHex = (uint8: Uint8Array): Hex =>
  * Same as below:
  *  const hexString = Buffer.from(uint8array).toString('hex');
  */
-export const uint8FromHex = (hex: Hex): Uint8Array | never => {
+export const uint8FromHex = (hex: string): Uint8Array | never => {
     // return zero length array if empty string
     if (!hex.length) return new Uint8Array(0);
 
