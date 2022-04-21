@@ -148,7 +148,7 @@ export class BaseConverter {
     /**
      * Create base map from given alphabet string.
      */
-    private createBaseMap(): Uint8Array | never {
+    private createBaseMap(): Uint8Array {
         // define empty base map blueprint
         const baseMap = new Uint8Array(256).fill(255);
 
