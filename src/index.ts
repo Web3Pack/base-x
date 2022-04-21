@@ -4,6 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file LICENSE or http://www.opensource.org/licenses/mit-license.php.
 
+import { BufferLike, uint8FromBufferLike } from './utils';
+
 export interface BaseConverter {
     encode(buffer: Uint8Array | number[]): string;
     decodeUnsafe(string: string): Uint8Array | undefined;
@@ -31,19 +33,11 @@ export function base(ALPHABET: string): BaseConverter {
     const FACTOR = Math.log(BASE) / Math.log(256); // log(BASE) / log(256), rounded up
     const iFACTOR = Math.log(256) / Math.log(BASE); // log(256) / log(BASE), rounded up
 
-    function encode(source: Uint8Array | number[]): string {
-        if (source instanceof Uint8Array) {
-        } else if (ArrayBuffer.isView(source)) {
-            source = new Uint8Array(
-                source.buffer,
-                source.byteOffset,
-                source.byteLength
-            );
-        } else if (Array.isArray(source)) {
-            source = Uint8Array.from(source);
-        }
-        if (!(source instanceof Uint8Array))
-            throw new TypeError('Expected Uint8Array');
+    function encode(source: BufferLike): string {
+        // convert buffer-like to Uint8Array
+        source = uint8FromBufferLike(source);
+
+        // skip encoding if source is empty
         if (source.length === 0) return '';
 
         // Skip & count leading zeroes.
