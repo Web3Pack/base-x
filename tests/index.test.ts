@@ -44,12 +44,6 @@ test('decode should return Uint8Array', () => {
     expect(base.decode('01') instanceof Uint8Array).toBeTruthy();
 });
 
-test('encode throws on string', () => {
-    const base = bases.base58;
-
-    expect(() => base.encode('a' as any)).toThrow(/^Expected Uint8Array$/);
-});
-
 test('encode not throw on Array or Uint8Array', () => {
     const base = bases.base58;
 
