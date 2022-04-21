@@ -37,7 +37,7 @@ export const validateHex = (hex: Hex): void | never => {
  */
 export const uint8ToHex = (uint8: Uint8Array): Hex =>
     Array.from(uint8).reduce(
-        (acc, curr) => `${acc}${curr.toString(16).padStart(2, '0')}`,
+        (acc, curr) => acc + curr.toString(16).padStart(2, '0'),
         ''
     );
 
