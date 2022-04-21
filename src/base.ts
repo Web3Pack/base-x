@@ -154,15 +154,7 @@ export class BaseConverter {
 
         // iterate over alphabet and create base map
         [...this.alphabet].forEach((char, i) => {
-            // get char code
-            const code = char.charCodeAt(0);
-
-            // fail if char is ambiguous
-            if (baseMap[code] !== 255) {
-                throw new TypeError(char + ' is ambiguous');
-            }
-
-            baseMap[code] = i;
+            baseMap[char.charCodeAt(0)] = i;
         });
 
         return baseMap;
