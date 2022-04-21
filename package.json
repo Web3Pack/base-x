@@ -21,8 +21,8 @@
     "crypto",
     "crytography"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Evren Ceyhan",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
