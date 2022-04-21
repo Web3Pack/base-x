@@ -22,12 +22,12 @@ export class BaseConverter {
     /**
      * Encode given buffer-like input.
      */
-    encode(source: BufferLike): string | never {
-        // convert buffer-like to Uint8Array
-        source = uint8FromBufferLike(source);
+    encode(buffer: BufferLike): string | never {
+        // skip encoding if buffer is empty
+        if (buffer.length === 0) return '';
 
-        // skip encoding if source is empty
-        if (source.length === 0) return '';
+        // convert buffer-like to Uint8Array
+        const source = uint8FromBufferLike(buffer);
 
         // Skip & count leading zeroes.
         let zeroes = 0;
