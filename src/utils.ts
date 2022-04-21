@@ -9,6 +9,11 @@ export type Hex = string;
 export type BufferLike = Uint8Array | number[];
 
 /**
+ * Calculate factoriel of n.
+ */
+export const calculateFactor = (x: number, y = 256) => Math.log(x) / Math.log(y);
+
+/**
  * Validate given alphabet.
  */
 export const validateAlphabet = (alphabet: string): void | never => {

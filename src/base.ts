@@ -1,4 +1,9 @@
-import { BufferLike, uint8FromBufferLike, validateAlphabet } from './utils';
+import {
+    BufferLike,
+    calculateFactor,
+    uint8FromBufferLike,
+    validateAlphabet,
+} from './utils';
 
 export class BaseConverter {
     /**
@@ -18,8 +23,8 @@ export class BaseConverter {
         this.base = alphabet.length;
         this.leader = alphabet.charAt(0);
         this.baseMap = this.createBaseMap();
-        this.factor = Math.log(this.base) / Math.log(256); // log(BASE) / log(256), rounded up
-        this.iFactor = Math.log(256) / Math.log(this.base); // log(256) / log(BASE), rounded up
+        this.factor = calculateFactor(this.base);
+        this.iFactor = calculateFactor(256, this.base);
     }
 
     /**
