@@ -7,8 +7,8 @@ const bases = { base2, base16, base45, base58 } as { [key: string]: Base };
 
 fixtures.valid.forEach((f) => {
     test(`can encode ${f.alphabet}: ${f.hex}`, () => {
-        var base = bases[f.alphabet]();
-        var actual = base.encode(uint8FromHex(f.hex));
+        const base = bases[f.alphabet]();
+        const actual = base.encode(uint8FromHex(f.hex));
 
         expect(actual).toBe(f.string);
     });
@@ -16,8 +16,8 @@ fixtures.valid.forEach((f) => {
 
 fixtures.valid.forEach((f) => {
     test('can decode ' + f.alphabet + ': ' + f.string, () => {
-        var base = bases[f.alphabet]();
-        var actual = uint8ToHex(base.decode(f.string));
+        const base = bases[f.alphabet]();
+        const actual = uint8ToHex(base.decode(f.string));
 
         expect(actual).toBe(f.hex);
     });
