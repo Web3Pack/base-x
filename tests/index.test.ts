@@ -32,7 +32,7 @@ fixtures.invalid.forEach((f) => {
         expect(() => {
             if (!base) base = basex(f.alphabet);
 
-            base.decode(f.string as any);
+            base.decode(f.string);
         }).toThrow(new RegExp(f.exception));
     });
 });

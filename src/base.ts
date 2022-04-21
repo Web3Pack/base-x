@@ -101,7 +101,7 @@ export class BaseConverter {
      * Decode given string with possible null result.
      */
     decodeUnsafe(source: string): Uint8Array | undefined | never {
-        if (typeof source !== 'string') throw new TypeError('Expected String');
+        // skip decoding if source is empty
         if (source.length === 0) return new Uint8Array();
 
         let psz = 0;

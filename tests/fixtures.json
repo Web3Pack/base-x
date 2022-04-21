@@ -617,12 +617,6 @@
         {
             "alphabet": "base58",
             "description": "non-base58 string",
-            "exception": "^Expected String$",
-            "string": {}
-        },
-        {
-            "alphabet": "base58",
-            "description": "non-base58 string",
             "exception": "^Non-base58 character$",
             "string": "#####"
         },
@@ -659,7 +653,8 @@
         {
             "alphabet": "0123456789fabcdef",
             "description": "poorly formed alphabet",
-            "exception": "^f is ambiguous$"
+            "exception": "^f is ambiguous$",
+            "string": ""
         }
     ]
 }
