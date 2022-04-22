@@ -15,7 +15,7 @@ Following alphabets are supported:
 ## Example
 
 ```ts
-import { base58 } from '../src';
+import { base58 } from '@web3pack/base-x';
 
 const base58Converter = base58();
 
