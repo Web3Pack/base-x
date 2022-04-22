@@ -1,7 +1,7 @@
 {
   "name": "@web3pack/base-x",
-  "version": "1.0.1",
-  "description": "Fast base encoding / decoding of any given alphabet",
+  "version": "1.0.2",
+  "description": "A modern base-x encoding library implemented in TypeScript with minimal dependencies for use in browser and Node.js.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -38,7 +38,6 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "npm run build & npm run test"
-    
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
